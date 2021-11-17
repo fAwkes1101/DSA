@@ -13,3 +13,4 @@ public static void main(String[] args) throws Exception {
             arr[i][j] = scn.nextInt();
         }
     } 
+}}
