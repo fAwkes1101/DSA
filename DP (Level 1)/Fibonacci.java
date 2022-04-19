@@ -1,55 +1,61 @@
-import java.io.*;
-import java.util.*;
+//Most optimised two pointer 
+public int fib(int n) {
+        //most optimised
+        if(n<=1) return n;
+        int prev2=0;
+        int prev1=1;
+        for(int i=2 ;i<=n ;i++){
+           int curr = prev1+prev2;
+            prev2=prev1;
+            prev1=curr;
+           
+        }
+        return prev1;
+        
+    }
 
-public class Main{
+// Tabulation
+public int fib(int n) {
+        if(n<=1) return n;
+        int[] dp =new int[n+1];
+        dp[0]=0;
+        dp[1]=1;
+        for(int i=2 ;i<=n ;i++){
+            dp[i]= dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+        
+    }
 
-public static int fib(int n){
-    if(n==0|| n==1) return n;
-
-    return fib(n-1)+fib(n-2);
+//Memoisation
+class Solution {
+    public int fibCalc(int n, int[] dp) {
+        if(n==0||n==1) return n;
+        
+        if(dp[n]!=-1){
+            return dp[n];
+        }
+        int prev1= fib(n-1);
+        int prev2 = fib(n-2);
+        
+        dp[n]=prev1+prev2;
+        return prev1+prev2;
+        
+    }
+    public int fib(int n) {
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        return fibCalc(n,dp);
+    }
 }
 
-public static int MemFib(int n, int[] dp){
-     if(n==0||n==1){
-         return n;
-     }
-     if(dp[n]!=-1){
-         return dp[n];
-     }
-
-     int fibn1 = MemFib(n-1, dp);
-     int fibn2 = MemFib(n-2, dp);
-
-     dp[n] = fibn1+fibn2;
-
-     return dp[n];
- }
-
- public static int TabFib(int n){
-     int[] dp = new int[n+1];
-
-     dp[0]=0; dp[1]=1;
-
-     for(int i=2; i< dp.length; i++){
-         dp[i]= dp[i-1]+dp[i-2];
-     }
-     return dp[n];
- }
-
-
-public static void main(String[] args) throws Exception {
-    // write your code here
-     Scanner scn = new Scanner(System.in);
-
-      int n = scn.nextInt();
-      int[] dp = new int[n+1];
-      
-      Arrays.fill(dp, -1);
-      System.out.println(fib(n));
-      System.out.println(MemFib(n, dp));
-      System.out.println(TabFib(n));
-
-
- }
-
-}
+//Recursive
+ public int fib(int n) {
+        if(n==0||n==1) return n;
+        
+        int prev1= fib(n-1);
+        int prev2 = fib(n-2);
+        
+        return prev1+prev2;
+        
+    }
